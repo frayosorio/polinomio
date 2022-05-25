@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package polinomios;
 
 import javax.swing.JFrame;
@@ -11,14 +10,15 @@ import javax.swing.JOptionPane;
 
 public class FrmPolinomios extends javax.swing.JFrame {
 
-    Polinomio p1;
-    
+    Polinomio p1, p2, pR;
+
     /**
      * Creates new form FrmPolinomios
      */
     public FrmPolinomios() {
         initComponents();
-        p1=new Polinomio();
+        p1 = new Polinomio();
+        p2 = new Polinomio();
     }
 
     /**
@@ -30,21 +30,20 @@ public class FrmPolinomios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblPolinomio1 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        btnAgregar = new javax.swing.JButton();
         txtCoeficiente = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtExponente = new javax.swing.JTextField();
-        btnAgregar = new javax.swing.JButton();
+        lblPolinomio2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        cmbPolinomio = new javax.swing.JComboBox();
+        lblPolinomio1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        cmbPolinomio1 = new javax.swing.JComboBox();
+        lblPolinomioR = new javax.swing.JLabel();
+        btnCalcular = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        lblPolinomio1.setBackground(new java.awt.Color(0, 153, 153));
-        lblPolinomio1.setOpaque(true);
-
-        jLabel1.setText("Coeficiente:");
-
-        jLabel2.setText("Exponente");
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -53,61 +52,112 @@ public class FrmPolinomios extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Exponente");
+
+        lblPolinomio2.setBackground(new java.awt.Color(0, 153, 153));
+        lblPolinomio2.setOpaque(true);
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 2, 48)); // NOI18N
+        jLabel3.setText("x");
+
+        cmbPolinomio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Polinomio 1", "Polinomio 2" }));
+
+        lblPolinomio1.setBackground(new java.awt.Color(0, 153, 153));
+        lblPolinomio1.setOpaque(true);
+
+        jLabel1.setText("Coeficiente:");
+
+        cmbPolinomio1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sumar", "Restar", "Multiplicar", "Dividir", "Derivar" }));
+
+        lblPolinomioR.setBackground(new java.awt.Color(204, 204, 0));
+        lblPolinomioR.setOpaque(true);
+
+        btnCalcular.setText("Calcular");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPolinomio1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblPolinomio2, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblPolinomio1, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtCoeficiente, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtExponente, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cmbPolinomio, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnAgregar))))))
+                    .addComponent(lblPolinomioR, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtExponente, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCoeficiente, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAgregar)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addComponent(btnCalcular)
+                        .addGap(39, 39, 39)
+                        .addComponent(cmbPolinomio1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtCoeficiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtExponente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(btnAgregar)))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtExponente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCoeficiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAgregar)
+                    .addComponent(cmbPolinomio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(lblPolinomio1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblPolinomio2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbPolinomio1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCalcular))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblPolinomioR, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        try{
-            double c = Double.parseDouble(txtCoeficiente.getText());
-            int e = Integer.parseInt(txtExponente.getText());
-            p1.agregar(new Nodo(c, e));
-            p1.mostrar(lblPolinomio1);
-        }
-        catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Datos no válidos");
+        if (cmbPolinomio.getSelectedIndex() >= 0) {
+            try {
+                double c = Double.parseDouble(txtCoeficiente.getText());
+                int e = Integer.parseInt(txtExponente.getText());
+                if (cmbPolinomio.getSelectedIndex() == 0) {
+
+                    p1.agregar(new Nodo(c, e));
+                    p1.mostrar(lblPolinomio1);
+                } else {
+                    p2.agregar(new Nodo(c, e));
+                    p2.mostrar(lblPolinomio2);
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Datos no válidos");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar el polinomio de destino");
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -148,9 +198,15 @@ public class FrmPolinomios extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnCalcular;
+    private javax.swing.JComboBox cmbPolinomio;
+    private javax.swing.JComboBox cmbPolinomio1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblPolinomio1;
+    private javax.swing.JLabel lblPolinomio2;
+    private javax.swing.JLabel lblPolinomioR;
     private javax.swing.JTextField txtCoeficiente;
     private javax.swing.JTextField txtExponente;
     // End of variables declaration//GEN-END:variables
