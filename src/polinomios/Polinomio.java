@@ -3,8 +3,8 @@ package polinomios;
 import java.awt.Font;
 import javax.swing.JLabel;
 
-
 public class Polinomio {
+
     Nodo cabeza;
 
     //Metodo constructor que crea un Polinomio vacio
@@ -87,9 +87,79 @@ public class Polinomio {
 
             apuntador = apuntador.siguiente;
         }
-        linea2 += " = 0";
+        if (!linea2.equals("")) {
+            linea2 += " = 0";
+        }
         lbl.setFont(new Font("Courier New", Font.PLAIN, 12));
         lbl.setText("<html>" + linea1 + "<br>" + linea2 + "</html>");
 
     }
+
+    //****** metodos estaticos
+    public static Polinomio sumar(Polinomio p1, Polinomio p2) {
+        Polinomio pR = new Polinomio();
+
+        Nodo apuntador1 = p1.obtenerCabeza();
+        Nodo apuntador2 = p2.obtenerCabeza();
+
+        while (!(apuntador1 == null && apuntador2 == null)) {
+            Nodo n = new Nodo();
+
+            if (apuntador1 != null && apuntador2 != null
+                    && apuntador1.exponente == apuntador2.exponente) {
+                n.exponente = apuntador1.exponente;
+                n.coeficiente = apuntador1.coeficiente + apuntador2.coeficiente;
+                apuntador1 = apuntador1.siguiente;
+                apuntador2 = apuntador2.siguiente;
+            } else if ((apuntador2 == null)
+                    || (apuntador1 != null && apuntador1.exponente < apuntador2.exponente)) {
+                n.exponente = apuntador1.exponente;
+                n.coeficiente = apuntador1.coeficiente;
+                apuntador1 = apuntador1.siguiente;
+            } else {
+                n.exponente = apuntador2.exponente;
+                n.coeficiente = apuntador2.coeficiente;
+                apuntador2 = apuntador2.siguiente;
+            }
+            if (n.coeficiente != 0) {
+                pR.agregar(n);
+            }
+        }
+
+        return pR;
+    }
+
+    public static Polinomio restar(Polinomio p1, Polinomio p2) {
+        Polinomio pR = new Polinomio();
+
+        Nodo apuntador1 = p1.obtenerCabeza();
+        Nodo apuntador2 = p2.obtenerCabeza();
+
+        while (!(apuntador1 == null && apuntador2 == null)) {
+            Nodo n = new Nodo();
+
+            if (apuntador1 != null && apuntador2 != null
+                    && apuntador1.exponente == apuntador2.exponente) {
+                n.exponente = apuntador1.exponente;
+                n.coeficiente = apuntador1.coeficiente - apuntador2.coeficiente;
+                apuntador1 = apuntador1.siguiente;
+                apuntador2 = apuntador2.siguiente;
+            } else if ((apuntador2 == null)
+                    || (apuntador1 != null && apuntador1.exponente < apuntador2.exponente)) {
+                n.exponente = apuntador1.exponente;
+                n.coeficiente = apuntador1.coeficiente;
+                apuntador1 = apuntador1.siguiente;
+            } else {
+                n.exponente = apuntador2.exponente;
+                n.coeficiente = -apuntador2.coeficiente;
+                apuntador2 = apuntador2.siguiente;
+            }
+            if (n.coeficiente != 0) {
+                pR.agregar(n);
+            }
+        }
+
+        return pR;
+    }
+    
 }
