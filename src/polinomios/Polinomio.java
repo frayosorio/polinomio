@@ -32,7 +32,18 @@ public class Polinomio {
                     }
                 }
                 if (encontrado == 1) {
-                    apuntador.coeficiente = n.coeficiente;
+                    //se acumulan los coeficientes
+                    double coeficiente = apuntador.coeficiente + n.coeficiente;
+                    if (coeficiente == 0) {
+                        //quitar el nodo
+                        if (predecedor == null) {
+                            cabeza = apuntador.siguiente;
+                        } else {
+                            predecedor.siguiente = apuntador.siguiente;
+                        }
+                    } else {
+                        apuntador.coeficiente = coeficiente;
+                    }
                 } else {
                     insertar(n, predecedor);
                 }
@@ -53,21 +64,7 @@ public class Polinomio {
         }
     }
 
-    public int grado() {
-        if (cabeza != null) {
-            Nodo apuntador = cabeza;
-            while (apuntador.siguiente != null) {
-                apuntador = apuntador.siguiente;
-            }
-            return apuntador.exponente;
-        }
-        return -1;
-    }
-
-    public Nodo obtenerCabeza() {
-        return cabeza;
-    }
-
+    //Muestra el polinomio como un texto en un JLABEL
     public void mostrar(JLabel lbl) {
         String espacio = "&nbsp;";
         String linea1 = "";
@@ -93,6 +90,48 @@ public class Polinomio {
         lbl.setFont(new Font("Courier New", Font.PLAIN, 12));
         lbl.setText("<html>" + linea1 + "<br>" + linea2 + "</html>");
 
+    }
+
+    //Devuelve el mayor exponente
+    public int grado() {
+        if (cabeza != null) {
+            Nodo apuntador = cabeza;
+            while (apuntador.siguiente != null) {
+                apuntador = apuntador.siguiente;
+            }
+            return apuntador.exponente;
+        }
+        return -1;
+    }
+
+    //Devuelve el primer nodo
+    public Nodo obtenerCabeza() {
+        return cabeza;
+    }
+
+    //Crea una copia del actual polinomio
+    public Polinomio obtenerCopia() {
+        Polinomio p = new Polinomio();
+        if (cabeza != null) {
+            Nodo apuntador = cabeza;
+            while (apuntador != null) {
+                Nodo n = new Nodo(apuntador.coeficiente, apuntador.exponente);
+                p.agregar(n);
+                apuntador = apuntador.siguiente;
+            }
+        }
+        return p;
+    }
+
+    public Nodo obtenerNodoMayorExponente() {
+        if (cabeza != null) {
+            Nodo apuntador = cabeza;
+            while (apuntador.siguiente != null) {
+                apuntador = apuntador.siguiente;
+            }
+            return apuntador;
+        }
+        return null;
     }
 
     //****** metodos estaticos
@@ -161,5 +200,50 @@ public class Polinomio {
 
         return pR;
     }
-    
+
+    public static Polinomio multiplicar(Polinomio p, Nodo n) {
+        Polinomio pR = new Polinomio();
+
+        Nodo apuntador = p.obtenerCabeza();
+        while (apuntador != null) {
+            Nodo nR = new Nodo();
+            nR.exponente = apuntador.exponente + n.exponente;
+            nR.coeficiente = apuntador.coeficiente * n.coeficiente;
+            pR.agregar(nR);
+
+            apuntador = apuntador.siguiente;
+        }
+
+        return pR;
+    }
+
+    public static boolean esDivisible(Nodo n1, Nodo n2) {
+        return n1.coeficiente % n2.coeficiente == 0 && n1.exponente >= n2.exponente;
+    }
+
+    public static Polinomio[] dividir(Polinomio p1, Polinomio p2) {
+        Polinomio cociente = new Polinomio();
+        Polinomio residuo = p1.obtenerCopia();
+
+        Nodo nDividendo = p1.obtenerNodoMayorExponente();
+        Nodo nDivisor = p2.obtenerNodoMayorExponente();
+
+        while (esDivisible(nDividendo, nDivisor)) {
+            Nodo nCociente = new Nodo();
+            nCociente.exponente = nDividendo.exponente - nDivisor.exponente;
+            nCociente.coeficiente = nDividendo.coeficiente / nDivisor.coeficiente;
+            cociente.agregar(nCociente);
+
+            Polinomio pT = multiplicar(p2, nCociente);
+            residuo = restar(residuo, pT);
+
+            nDividendo = residuo.obtenerNodoMayorExponente();
+        }
+
+        Polinomio[] pR = new Polinomio[2];
+        pR[0] = cociente;
+        pR[1] = residuo;
+        return pR;
+    }
+
 }

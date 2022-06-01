@@ -46,6 +46,7 @@ public class FrmPolinomios extends javax.swing.JFrame {
         btnLimpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Polinomios");
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -189,6 +190,10 @@ public class FrmPolinomios extends javax.swing.JFrame {
                 break;
             case 1:
                 pR = Polinomio.restar(p1, p2);
+                pR.mostrar(lblPolinomioR);
+                break;
+            case 3:
+                pR = Polinomio.dividir(p1, p2)[0];
                 pR.mostrar(lblPolinomioR);
                 break;
         }
